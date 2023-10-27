@@ -36,3 +36,6 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: table
+      +persist_docs: #writes all of our columns descriptions into BigQuery
+        relation: true 
+        columns: true 
