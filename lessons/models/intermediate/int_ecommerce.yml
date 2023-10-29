@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: int_ecommerce__order_items_products
+    description: "Order item data joined to product data"
+    columns:
+      - name: order_item_id
+        data_type: int64
+        description: ""
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id 
+        data_type: int64
+        description: ""
+        tests:
+          - not_null 
+
+      # The "&" is a YML anchor which you can reference later in the file
+      - &user_id
+        name: user_id
+        data_type: int64
+        description: "Unique identifier for a user"
+        tests:
+          - not_null
+
+      - name: product_id
+        data_type: int64
+        description: ""
+        tests:
+          - not_null
+
+      - name: item_sale_price
+        data_type: float64
+        description: "How much the item sold for"
+        tests:
+          - not_null 
+
+      - name: product_department
+        data_type: string
+        description: "Whether the item is Menswear or Womenswear"
+        tests:
+          - not_null
+
+      - name: product_cost
+        data_type: float64
+        description: "How much the product cost the business to purchase"
+        tests:
+          - not_null
+
+      - name: product_retail_price
+        data_type: float64
+        description: "How much the product retails for on the online store"
+        tests:
+          - not_null
+
+      - name: item_profit
+        data_type: float64
+        description: "How much the product retails for on the online store"
+        tests:
+          - not_null
+
+      - name: item_discount
+        data_type: float64
+        description: "product_retail_price minus item_sales_price"
+        tests:
+          - not_null
