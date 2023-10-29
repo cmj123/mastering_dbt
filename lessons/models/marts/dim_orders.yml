@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: dim_orders
+    description: "Table of order level information"
+    columns:
+
+    # Columns from stg_ecommerce__orders
+    # We don't test these columns, other than the primary key
+    # as we've already tested them in the staging model. But feel free
+    # to add your own tests here!
+      - name: order_id
+        data_type: int64
+        description: ""
+        tests:
+          # Generic test that we defined in tests/generic/test_primary_key.sql
+          # Takes arguments for model & column_name, both of which are automatically passed to it
+          - unique 
+          - relationships:
+              to: ref('stg_ecommerce__orders')
+              field: order_id
+
+      - name: order_created_at
+        data_type: timestamp
+        description: "When the order was created"
+
+      - name: order_shipped_at
+        data_type: timestamp
+        description: "When the order was shipped"
+
+      - name: order_delivered_at
+        data_type: timestamp
+        description: "When the order was delivered"
+
+      - name: order_returned_at
+        data_type: timestamp
+        description: "When the order was returned"
+
+      - name: order_status
+        data_type: string
+        description: ""
+
+      - name: num_items_ordered
+        data_type: int64
+        description: "Number of items in the order"
+
+    # Columns from int_ecommerce__order_items_product
+    # We should test these columns as they're new
+
+      - name: total_sale_price
+        data_type: float64
+        description: "Sum of product_cost for the whole order"
+        tests:
+          - not_null
+
+      - name: total_product_cost
+        data_type: float64
+        description: "Sum of product_cost for the whole order"
+        tests:
+          - not_null
+
+      - name: total_profit
+        data_type: float64
+        description: "Sum of (item_sale_price - product_cost) for the whole order"
+        tests:
+          - not_null
+
+      - name: total_discount
+        data_type: float64
+        description: "Sum of (product_retail_price - item_sale_price) for the whole order"
+        test:
+          - not_null
