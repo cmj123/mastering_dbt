@@ -1,6 +1,9 @@
 {{
   config(
     materialized = 'table',
+    hours_to_expiration = 168,
+    persist_docs={"relation": true, "columns": true}
+    
     )
 }}
 
