@@ -29,7 +29,9 @@ models:
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
           - dbt_utils.expression_is_true:
+              name: retail_price_greater_than_cost
               expression: ">= cost"
+              where: "retail_price IS NOT NULL"
 
       - name: department
         data_type: string
@@ -40,4 +42,6 @@ models:
               values:
                 - "Men"
                 - "Women"
+              # quote defaults to true, but this just shows how you could set it to
+              # false if you wanted to have non-string values (e.g numbers or a TRUE/FALSE colums status)
               quote: true
