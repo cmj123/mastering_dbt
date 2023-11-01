@@ -62,9 +62,10 @@ models:
         description: "When the order was delivered"
         tests:
           - not_null:
-              where: "returned_at IS NOT NULL OR status = 'Complete"
+              where: "returned_at IS NOT NULL OR status = 'Complete'"
           - dbt_utils.expression_is_true:
-              expression: ">= shipped_at IS NOT NULL AND shipped_at IS NOT NULL"
+              expression: ">= shipped_at"
+              where: "delivered_at IS NOT NULL AND shipped_at IS NOT NULL"
 
       - name: num_items_ordered
         data_type: int64

@@ -8,8 +8,8 @@ models:
         data_type: int64
         description: ""
         tests:
-          - not_null
-          - unique
+          - primary_key:
+              severity: error
 
       - name: order_id 
         data_type: int64
@@ -60,9 +60,13 @@ models:
         description: "How much the product retails for on the online store"
         tests:
           - not_null
+          - dbt_utils.expression_is_true:
+              expression: "= (item_sale_price - product_cost)"
 
       - name: item_discount
         data_type: float64
         description: "product_retail_price minus item_sales_price"
         tests:
           - not_null
+          - dbt_utils.expression_is_true:
+              expression: "= (product_retail_price - item_sale_price)"
