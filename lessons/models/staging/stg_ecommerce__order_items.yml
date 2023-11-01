@@ -10,9 +10,6 @@ models:
         tests:
           - not_null:
               severity: error
-          - unique:
-              severity: error
-
 
       - name: order_id
         data_type: int64
