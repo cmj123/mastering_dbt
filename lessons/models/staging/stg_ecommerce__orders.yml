@@ -19,7 +19,7 @@ models:
 
       - name: status
         data_type: string
-        description: ""
+        description: "{{ doc('status') }}" 
         tests:
           - accepted_values:
               name: unexpected_order_status # we can name our test to make it easier to give more meaningful errors
