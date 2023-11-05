@@ -1,8 +1,14 @@
+
 {{
   config(
     materialized = 'incremental',
-    unique_key = 'event_id',
-    on_schema_change = 'sync_all_columns'
+    unique_key='event_id',
+    on_schema_change='sync_all_columns',
+    partition_by={
+            "field": "created_at",
+            "data_type": "timestamp",
+            "granularity": "day"
+        }
     )
 }}
 
