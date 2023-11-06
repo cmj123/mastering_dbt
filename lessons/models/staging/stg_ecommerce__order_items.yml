@@ -3,9 +3,14 @@ version: 2
 models:
   - name: stg_ecommerce__order_items
     description: "Line items from orders"
+    config:
+      contract:
+        enforced: true 
     columns:
       - name: order_item_id
         data_type: int64
+        contraints:
+          - type: not_null
         description: ""
         tests:
           - not_null:
@@ -13,6 +18,8 @@ models:
 
       - name: order_id
         data_type: int64
+        contraints:
+          - type: not_null
         description: ""
         test:
           - not null
@@ -22,12 +29,16 @@ models:
 
       - name: user_id
         data_type: int64
+        contraints:
+          - type: not_null
         description: ""
         tests:
           - not_null
 
       - name: product_id
         data_type: int64
+        contraints:
+          - type: not_null
         description: ""
         tests:
           - not_null
