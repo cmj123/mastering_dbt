@@ -5,7 +5,7 @@
        target_schema='dbt_snapshots',
        unique_key='id',
        strategy='check',
-       check_cols = ['name', 'latitude', 'longtitude']
+       check_cols = ['name', 'latitude', 'longitude']
    )
 }}
 
