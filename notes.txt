@@ -1,0 +1,26 @@
+-- First SRC
+dbt run-operation generate_base_model --args "{'source_name': 'thelook_ecommerce', 'table_name': 'orders'}"
+
+-- First yaml file
+dbt run-operation generate_model_yaml --args "{'model_names': ['stg_ecommerce__orders']}"
+
+-- Test 
+dbt test -s stg_ecommerce__order_items
+
+-- Show compiled 
+command + # (window)
+command + ' (MacOs)
+
+dbt build
+
+dbt run && dbt test 
+
+-- Test for data freshness
+dbt source freshness
+
+-- Run a seed files 
+dbt seed
+
+-- Build a full refresh
+dbt clean
+dbt build --full-refresh
