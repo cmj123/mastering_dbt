@@ -16,7 +16,12 @@ order_item_measures AS (
         SUM(item_sale_price) AS total_sale_price,
         SUM(product_cost) AS total_product_cost,
         SUM(item_profit) AS total_profit,
-        SUM(item_discount) AS total_discount
+        SUM(item_discount) AS total_discount,
+
+        {%- set departments = ['Men', 'Women'] -%}
+        {%- for department in departments %}
+        SUM(IF(product_department = '{{ department }}', item_sale_price, 0)) AS total_sold_{{ department.lower()}}swear{% if not loop.last %},{% endif -%}
+        {% endfor %}
 
     FROM {{ ref('int_ecommerce__order_items_products') }}
     GROUP BY 1
@@ -38,6 +43,12 @@ SELECT
     om.total_product_cost,
     om.total_profit,
     om.total_discount,
+
+    -- Columns from our templated Jinja statement
+    -- We could have just hard code these if we wanted, e.g.: total_sold_mens_swear, total_sold_womenswear
+    {%- for department in departments %}
+    total_sold_{{ department.lower()}}swear, 
+    {%- endfor %}
 
     TIMESTAMP_DIFF(od.created_at, user_data.first_order_created_at, DAY) AS days_since_first_order
 
