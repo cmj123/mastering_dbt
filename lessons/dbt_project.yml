@@ -50,6 +50,8 @@ models:
       {% if target.name == 'test' %} 1
       {% else %} 168
       {% endif %}
+    intermediate:
+      +tags: ['my_tag', 'my_other_tag']
 
 tests:
   lessons:

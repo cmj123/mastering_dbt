@@ -1,8 +1,8 @@
-{{
+{# {{
   config(
     materialized = 'table',
     )
-}}
+}} #}
 
 WITH products AS (
     SELECT
